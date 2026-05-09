@@ -105,10 +105,14 @@ section > *:not(h2) {
 #home p {
   background: rgba(255, 247, 210, 0.15);
   backdrop-filter: blur(20px);
-  padding: 15px 25px;
+  padding: 0;
   border-radius: 10px;
   max-width: 500px;
   margin: 20px auto;
+}
+
+section p, .social, .live-table {
+  padding: 20px;
 }
 
 /* ABOUT */
@@ -213,39 +217,100 @@ section > *:not(h2) {
 }
 
 .hero-image {
-  width: 90%;
-
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-
   margin-top: 80px;
-
   overflow: hidden;
+  /* Entfernt das Padding, das durch section > *:not(h2) entsteht */
+  padding: 0 !important; 
 }
 
 .hero-image img {
   width: 100%;
   max-width: 600px;
-
   aspect-ratio: 1 / 1;
   object-fit: contain;
-
- display: block;
+  /* display: center entfernt, da ungültig */
+  display: block; 
 }
-
 
 body {
   margin: 0;
   padding: 0;
 }
 
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zentriert die Felder horizontal */
+  gap: 15px;
+  width: 90%;
+  max-width: 500px; /* Kompaktere Breite für bessere Optik */
+  background: rgba(255, 247, 210, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 30px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.contact-form input, 
+.contact-form textarea {
+  width: 100%; /* Nutzt die volle Breite des zentrierten Formulars */
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px;
+  box-sizing: border-box; /* Verhindert, dass Padding die Breite sprengt */
+  background: white;
+}
+
+.contact-form button {
+  width: 100%; /* Button ist genauso breit wie die Felder */
+  max-width: 200px; /* Optional: Button schmaler als Felder */
+  background: black;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.contact-form button:hover {
+  background: #333;
+  transform: scale(1.02);
+}
+
+/* Anpassung für mobile Endgeräte */
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 20px;
+  }
+}
+
+
 html, body {
   overflow-x: hidden;
 }
 
 * {
-   outline: 0px solid red;
+   outline: 0px solid red; /* TEST ROTE STRICHE */
 }
 
 </style>
@@ -265,12 +330,13 @@ html, body {
 
 <!-- HOME -->
 <section id="home">
-  <!-- <h1>BUNSKI</h1> -->
+
 
 <div class="hero-image">
   <img src="Band2.jpg" alt="Bunski">
 </div>
 
+ 
     <p>
       Bunski ist die Indierockband aus Wien. Vier Freunde – Gesang, zwei Gitarren,
       Bass und Drums – mit einem Sound, der zwischen treibendem Gitarrenrock
@@ -284,6 +350,12 @@ html, body {
 <section id="music">
   <h2>MUSIC</h2>
 
+
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/Yn6bRlefgqo" allowfullscreen></iframe>
+  </div>
+
+
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/USITm5sKiRw" allowfullscreen></iframe>
 
@@ -292,7 +364,6 @@ html, body {
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/rspQUu8whjA" allowfullscreen></iframe>
   </div>
-
 
 
 </section>
@@ -347,10 +418,23 @@ html, body {
 <!-- KONTAKT -->
 <section id="contact">
   <h2>CONTACT US</h2>
+  <P>für Buchungsanfragen, Beschwerden oder Liebesbriefe hier schreiben. Wir antworten garantiert!</P>
+  <div class="contact-container">
+    <form action="https://formspree.io/f/xkoyqypb" method="POST" class="contact-form">
+      <input type="text" name="name" placeholder="Dein Name" required>
+      <input type="email" name="_replyto" placeholder="Deine E-Mail Adresse" required>
+      <textarea name="message" rows="5" placeholder="Deine Nachricht an Bunski..." required></textarea>
+      
+      <!-- Anti-Spam Honeypot -->
+      <input type="text" name="_gotcha" style="display:none">
+      
+      <button type="submit">ABSENDEN</button>
+    </form>
+  </div>
 
-  <p>
-    <a href="mailto:xxx">xxx</a>
-  </p>
+
+
+
 </section>
 
 <!-- SOCIAL -->
@@ -358,8 +442,8 @@ html, body {
   <h2>SOCIAL MEDIA</h2>
 
   <div class="social">
-    <a href="https://youtube.com" target="_blank">YouTube</a>
-    <a href="https://spotify.com" target="_blank">Spotify</a>
+    <a href="https://youtube.com/channel/UCukvPqDsM5peg2mVeQDBVkQ?si=wK31ujRCpqsqGQKF" target="_blank">YouTube</a>
+    <a href="https://open.spotify.com/intl-de/artist/6UgtHpGSuJkm7slCFYlpwb?si=q2WwisVxQoagJP-5OAdVPw" target="_blank">Spotify</a>
     <a href="https://www.instagram.com/bunski_music/" target="_blank">Instagram</a>
   </div>
 </section>
