@@ -6,6 +6,7 @@
 <title>Bunski</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 body {
@@ -27,16 +28,12 @@ p {
   margin: 15px auto;
 }
 
-
-
-
 h1 {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
   letter-spacing: 1px;
   font-size: 100px;
 }
-
 
 h2 {
   width: 100%;
@@ -52,14 +49,14 @@ h2 {
   backdrop-filter: blur(8px); /* optional: wie Navbar */
 }
 
-
-  h3 {
+h3 {
   font-size: 16px;
   letter-spacing: 2px;
   margin-top: 40px;
   margin-bottom: 10px;
   opacity: 0.7;
 }
+
 /* NAV */
 nav {
   position: fixed;
@@ -111,7 +108,7 @@ section > *:not(h2) {
   margin: 20px auto;
 }
 
-section p, .social, .live-table {
+section p, .live-table {
   padding: 20px;
 }
 
@@ -139,19 +136,103 @@ section p, .social, .live-table {
   margin-top: 20px;
 }
 
-/* SOCIAL */
-.social a {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 20px;
-  border: 1px solid black;
-  text-decoration: none;
+/* PHOTOS SEKTION (NEU) */
+.photo-slider {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch; /* Sanftes Scrollen auf iOS */
+}
+
+/* Versteckt den Scrollbalken in modernen Browsern für eine sauberere Optik */
+.photo-slider::-webkit-scrollbar {
+  height: 8px;
+}
+.photo-slider::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.photo-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 300px; /* Feste Breite der Bildelemente im Slider */
+  background: rgba(255, 247, 210, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.photo-item img {
+  width: 100%;
+  height: 225px; /* Feste Höhe für einheitlichen Look */
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.photo-item img:hover {
+  transform: scale(1.03);
+}
+
+.photo-caption {
+  font-size: 16px;
+  padding: 10px 15px;
+  margin: 0;
+  text-align: center;
   color: black;
 }
 
-.social a:hover {
-  background: black;
-  color: white;
+/* SOCIAL SEKTION */
+.social-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+  max-width: 250px;
+  margin: 0 auto 30px auto;
+  padding: 20px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: black;
+  font-size: 22px;
+  font-weight: 300;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-link i {
+  font-size: 32px;
+  width: 35px;
+  text-align: center;
+}
+
+.social-link:hover {
+  transform: translateX(5px);
+}
+
+.social-link.spotify:hover {
+  color: #1ed760;
+}
+
+.social-link.youtube:hover {
+  color: #ff0000;
+}
+
+.social-link.instagram:hover {
+  color: #e1306c;
 }
 
 /* RESPONSIVE */
@@ -159,8 +240,13 @@ section p, .social, .live-table {
   .video-container iframe {
     height: 250px;
   }
+  .photo-item {
+    width: 260px; /* Etwas schmaler auf mobilen Endgeräten */
+  }
+  .photo-item img {
+    height: 195px;
+  }
 }
-
 
 .live-table {
   width: 100%;
@@ -172,7 +258,6 @@ section p, .social, .live-table {
   backdrop-filter: blur(8px);
   border-radius: 10px;
   padding: 10px;
-  
 }
 
 .live-table th {
@@ -223,7 +308,6 @@ section p, .social, .live-table {
   align-items: center;
   margin-top: 80px;
   overflow: hidden;
-  /* Entfernt das Padding, das durch section > *:not(h2) entsteht */
   padding: 0 !important; 
 }
 
@@ -232,7 +316,6 @@ section p, .social, .live-table {
   max-width: 600px;
   aspect-ratio: 1 / 1;
   object-fit: contain;
-  /* display: center entfernt, da ungültig */
   display: block; 
 }
 
@@ -252,10 +335,10 @@ body {
 .contact-form {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Zentriert die Felder horizontal */
+  align-items: center;
   gap: 15px;
   width: 90%;
-  max-width: 500px; /* Kompaktere Breite für bessere Optik */
+  max-width: 500px;
   background: rgba(255, 247, 210, 0.85);
   backdrop-filter: blur(8px);
   padding: 30px;
@@ -265,19 +348,19 @@ body {
 
 .contact-form input, 
 .contact-form textarea {
-  width: 100%; /* Nutzt die volle Breite des zentrierten Formulars */
+  width: 100%;
   padding: 12px;
   border: 1px solid rgba(0,0,0,0.2);
   border-radius: 5px;
   font-family: 'Oswald', sans-serif;
   font-size: 18px;
-  box-sizing: border-box; /* Verhindert, dass Padding die Breite sprengt */
+  box-sizing: border-box;
   background: white;
 }
 
 .contact-form button {
-  width: 100%; /* Button ist genauso breit wie die Felder */
-  max-width: 200px; /* Optional: Button schmaler als Felder */
+  width: 100%;
+  max-width: 200px;
   background: black;
   color: white;
   padding: 15px;
@@ -304,7 +387,6 @@ body {
   }
 }
 
-
 html, body {
   overflow-x: hidden;
 }
@@ -312,7 +394,6 @@ html, body {
 * {
    outline: 0px solid red; /* TEST ROTE STRICHE */
 }
-
 </style>
 </head>
 
@@ -320,58 +401,41 @@ html, body {
 
 <nav>
   <a href="#home">HOME</a>
-  <!-- <a href="#about">ABOUT</a> -->
   <a href="#music">MUSIC</a>
   <a href="#live">LIVE</a>
+  <a href="#photos">PHOTOS</a>
   <a href="#contact">CONTACT</a>
   <a href="#social">SOCIALS</a>
-  
 </nav>
 
-<!-- HOME -->
 <section id="home">
-
-
-<div class="hero-image">
-  <img src="Band2.jpg" alt="Bunski">
-</div>
-
- 
-    <p>
-      Bunski ist die Indierockband aus Wien. Vier Freunde - Vocals, zwei E-Gitarren,
-      Bass und Drums - mit einem Sound, der zwischen treibendem Gitarrenrock
-      und verspielter Leichtigkeit pendelt. Melodien, die im Kopf bleiben,
-      Riffs, die unter die Haut gehen und Bum Tschak zum Mitwippen.
-    </p>
-
+  <div class="hero-image">
+    <img src="Band2.jpg" alt="Bunski">
+  </div>
+  <p>
+    BUNSKI ist die neue Indierockband aus Wien. Vier Freunde - Vocals, zwei E-Gitarren,
+    Bass und Drums - mit einem Sound, der zwischen treibendem Gitarrenrock
+    und verspielter Leichtigkeit pendelt. Melodien, die im Kopf bleiben,
+    Riffs, die unter die Haut gehen und Bum Tschak zum Mitwippen.
+  </p>
 </section>
 
-<!-- MUSIK -->
 <section id="music">
   <h2>MUSIC</h2>
-
-
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/Yn6bRlefgqo" allowfullscreen></iframe>
   </div>
-
-
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/USITm5sKiRw" allowfullscreen></iframe>
-
   </div>
-
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/rspQUu8whjA" allowfullscreen></iframe>
   </div>
-
-
 </section>
 
-<!-- LIVE -->
 <section id="live">
   <h2>LIVE</h2>
- <P>BUNSKI zum hautnah erleben! </P>
+  <p>BUNSKI zum hautnah erleben!</p>
   <table class="live-table">
     <thead>
       <tr>
@@ -388,63 +452,107 @@ html, body {
           <img src="PosterLucia.jpg" class="thumb" onclick="openImage(this.src)">
         </td>
       </tr>
-	  
-
-	  
-	  <tr>
+      <tr>
         <td>19.11.2025</td>
         <td>Cafe Carina, Wien</td>
         <td>
           <img src="cafecarina1.jpg" class="thumb" onclick="openImage(this.src)">
         </td>
       </tr>
-	  
-	  	  <tr>
+      <tr>
         <td>28.06.2025</td>
         <td>The Church International Pub, Wien</td>
         <td>
           <img src="church06.05.2026.png" class="thumb" onclick="openImage(this.src)">
         </td>
       </tr>
-	  
     </tbody>
   </table>
 </section>
 
-<!-- Lightbox -->
+<section id="photos">
+  <h2>PHOTOS</h2>
+  <p>Einblicke hinter die Kulissen und von der Bühne.</p>
+  <div class="photo-slider">
+    <div class="photo-item">
+      <img src="Foto1.jpg" alt="Bunski Foto 1" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto2.jpg" alt="Bunski Foto 2" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto3.jpg" alt="Bunski Foto 3" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto4.jpg" alt="Bunski Foto 4" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto5.jpg" alt="Bunski Foto 5" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto1.jpg" alt="Bunski Foto 6" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto2.jpg" alt="Bunski Foto 7" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto3.jpg" alt="Bunski Foto 8" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto4.jpg" alt="Bunski Foto 9" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto5.jpg" alt="Bunski Foto 10" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+  </div>
+</section>
+
 <div id="lightbox" onclick="closeImage()">
   <img id="lightbox-img">
 </div>
-<!-- KONTAKT -->
+
 <section id="contact">
   <h2>CONTACT US</h2>
-  <P>für Buchungsanfragen, Beschwerden oder Liebesbriefe kannst du uns hier schreiben. Wir antworten garantiert!</P>
+  <p>für Buchungsanfragen, Beschwerden oder Liebesbriefe kannst du uns hier schreiben. Wir antworten garantiert!</p>
   <div class="contact-container">
     <form action="https://formspree.io/f/xkoyqypb" method="POST" class="contact-form">
       <input type="text" name="name" placeholder="Dein Name" required>
       <input type="email" name="_replyto" placeholder="Deine E-Mail Adresse" required>
       <textarea name="message" rows="5" placeholder="Deine Nachricht an Bunski..." required></textarea>
       
-      <!-- Anti-Spam Honeypot -->
       <input type="text" name="_gotcha" style="display:none">
       
       <button type="submit">ABSENDEN</button>
     </form>
   </div>
-
-
-
-
 </section>
 
-<!-- SOCIAL -->
 <section id="social">
   <h2>SOCIAL MEDIA</h2>
- <P>Folgt uns auf diesen Plattformen! </P>
-  <div class="social">
-    <a href="https://youtube.com/channel/UCukvPqDsM5peg2mVeQDBVkQ?si=wK31ujRCpqsqGQKF" target="_blank">YouTube</a>
-    <a href="https://open.spotify.com/intl-de/artist/6UgtHpGSuJkm7slCFYlpwb?si=q2WwisVxQoagJP-5OAdVPw" target="_blank">Spotify</a>
-    <a href="https://www.instagram.com/bunski_music/" target="_blank">Instagram</a>
+  <p>Folgt uns auf diesen Plattformen!</p>
+  <div class="social-list">
+    <a href="https://open.spotify.com/intl-de/artist/6UgtHpGSuJkm7slCFYlpwb?si=q2WwisVxQoagJP-5OAdVPw" target="_blank" class="social-link spotify">
+      <i class="fab fa-spotify"></i>
+      <span class="social-text">Spotify: Bunski</span>
+    </a>
+    <a href="https://youtube.com/channel/UCukvPqDsM5peg2mVeQDBVkQ?si=wK31ujRCpqsqGQKF" target="_blank" class="social-link youtube">
+      <i class="fab fa-youtube"></i>
+      <span class="social-text">Youtube: Bunski</span>
+    </a>
+    <a href="https://www.instagram.com/bunski_music/" target="_blank" class="social-link instagram">
+      <i class="fab fa-instagram"></i>
+      <span class="social-text">Instagram: Bunski_Music</span>
+    </a>
   </div>
 </section>
 
