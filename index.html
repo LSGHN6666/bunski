@@ -57,6 +57,671 @@ h3 {
   opacity: 0.7;
 }
 
+/* NAV / NAVIGATION */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+  display: block;
+  font-weight: 300;
+  letter-spacing: 1px;
+  transition: background 0.3s;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Burger Menu Icon (Standardmäßig versteckt auf Desktop) */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1010;
+}
+
+.burger span {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+section {
+  min-height: auto;
+  text-align: center;
+  padding: 0; /* wichtig */
+  scroll-margin-top: 60px; /* Höhe deiner Navbar */
+}
+
+section > *:not(h2) {
+  padding: 20px;
+}
+
+/* VIDEO */
+.video-container {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 450px;
+  border: none;
+}
+
+#home p {
+  background: rgba(255, 247, 210, 0.15);
+  backdrop-filter: blur(20px);
+  padding: 0;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+section p, .live-table {
+  padding: 20px;
+}
+
+/* ABOUT */
+.about {
+  max-width: 900px;
+  margin: auto;
+}
+
+.about img {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+.about p {
+  max-width: 500px;
+  margin: 20px auto;
+  line-height: 1.6;
+}
+
+/* LIVE */
+.live img {
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+/* PHOTOS SEKTION */
+.photo-slider {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch; /* Sanftes Scrollen auf iOS */
+}
+
+.photo-slider::-webkit-scrollbar {
+  height: 8px;
+}
+.photo-slider::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.photo-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 300px;
+  background: rgba(255, 247, 210, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.photo-item img {
+  width: 100%;
+  height: 225px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.photo-item img:hover {
+  transform: scale(1.03);
+}
+
+.photo-caption {
+  font-size: 16px;
+  padding: 10px 15px;
+  margin: 0;
+  text-align: center;
+  color: black;
+}
+
+/* SOCIAL SEKTION */
+.social-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+  max-width: 250px;
+  margin: 0 auto 30px auto;
+  padding: 20px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: black;
+  font-size: 22px;
+  font-weight: 300;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-link i {
+  font-size: 32px;
+  width: 35px;
+  text-align: center;
+}
+
+.social-link:hover {
+  transform: translateX(5px);
+}
+
+.social-link.spotify:hover {
+  color: #1ed760;
+}
+
+.social-link.youtube:hover {
+  color: #ff0000;
+}
+
+.social-link.instagram:hover {
+  color: #e1306c;
+}
+
+/* RESPONSIVE DESIGN (MOBILGERÄTE) */
+@media (max-width: 768px) {
+  nav {
+    justify-content: flex-end; /* Richtet den Burger-Button rechts aus */
+    padding: 15px 20px;
+    min-height: 55px;
+  }
+
+  .burger {
+    display: flex; /* Zeigt den Burger-Button rechts an */
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  nav a {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .video-container iframe {
+    height: 250px;
+  }
+  .photo-item {
+    width: 260px;
+  }
+  .photo-item img {
+    height: 195px;
+  }
+}
+
+.live-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  
+  background: rgba(255, 247, 210, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.live-table th {
+  text-transform: uppercase;
+  padding: 10px;
+  border-bottom: 2px solid black;
+}
+
+.live-table td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+/* Thumbnail */
+.thumb {
+  width: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.thumb:hover {
+  transform: scale(1.1);
+}
+
+/* Lightbox */
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.hero-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  overflow: hidden;
+  padding: 0 !important; 
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  display: block; 
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 90%;
+  max-width: 500px;
+  background: rgba(255, 247, 210, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 30px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.contact-form input, 
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px;
+  box-sizing: border-box;
+  background: white;
+}
+
+.contact-form button {
+  width: 100%;
+  max-width: 200px;
+  background: black;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.contact-form button:hover {
+  background: #333;
+  transform: scale(1.02);
+}
+
+/* Anpassung für mobile Endgeräte */
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 20px;
+  }
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+* {
+   outline: 0px solid red; /* TEST ROTE STRICHE */
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <button class="burger" id="burger-menu" aria-label="Menü öffnen">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  
+  <div class="nav-links" id="nav-links-container">
+    <a href="#home">HOME</a>
+    <a href="#music">MUSIC</a>
+    <a href="#live">LIVE</a>
+    <a href="#photos">PHOTOS</a>
+    <a href="#contact">CONTACT</a>
+    <a href="#social">SOCIALS</a>
+  </div>
+</nav>
+
+<section id="home">
+  <div class="hero-image">
+    <img src="Band2.jpg" alt="Bunski">
+  </div>
+  <p>
+    BUNSKI ist die neue Indierockband aus Wien. Vier Freunde - Vocals, zwei E-Gitarren,
+    Bass und Drums - mit einem Sound, der zwischen treibendem Gitarrenrock
+    und verspielter Leichtigkeit pendelt. Melodien, die im Kopf bleiben,
+    Riffs, die unter die Haut gehen und Bum Tschak zum Mitwippen.
+  </p>
+</section>
+
+<section id="music">
+  <h2>MUSIC</h2>
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/Yn6bRlefgqo" allowfullscreen></iframe>
+  </div>
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/USITm5sKiRw" allowfullscreen></iframe>
+  </div>
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/rspQUu8whjA" allowfullscreen></iframe>
+  </div>
+</section>
+
+<section id="live">
+  <h2>LIVE</h2>
+  <p>BUNSKI zum hautnah erleben!</p>
+  <table class="live-table">
+    <thead>
+      <tr>
+        <th>Datum</th>
+        <th>Venue</th>
+        <th>Foto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>07.06.2026</td>
+        <td>Club Lucia, Wien</td>
+        <td>
+          <img src="PosterLucia.jpg" class="thumb" onclick="openImage(this.src)">
+        </td>
+      </tr>
+      <tr>
+        <td>19.11.2025</td>
+        <td>Cafe Carina, Wien</td>
+        <td>
+          <img src="cafecarina1.jpg" class="thumb" onclick="openImage(this.src)">
+        </td>
+      </tr>
+      <tr>
+        <td>28.06.2025</td>
+        <td>The Church International Pub, Wien</td>
+        <td>
+          <img src="church06.05.2026.png" class="thumb" onclick="openImage(this.src)">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="photos">
+  <h2>PHOTOS</h2>
+  <p>Einblicke hinter die Kulissen und von der Bühne.</p>
+  <div class="photo-slider">
+    <div class="photo-item">
+      <img src="Foto1.jpg" alt="Bunski Foto 1" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto2.jpg" alt="Bunski Foto 2" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto3.jpg" alt="Bunski Foto 3" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto4.jpg" alt="Bunski Foto 4" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto5.jpg" alt="Bunski Foto 5" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto1.jpg" alt="Bunski Foto 6" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto2.jpg" alt="Bunski Foto 7" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto3.jpg" alt="Bunski Foto 8" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto4.jpg" alt="Bunski Foto 9" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+    <div class="photo-item">
+      <img src="Foto5.jpg" alt="Bunski Foto 10" onclick="openImage(this.src)">
+      <p class="photo-caption">Live@Lucia Photo: Peter Griesser</p>
+    </div>
+  </div>
+</section>
+
+<div id="lightbox" onclick="closeImage()">
+  <img id="lightbox-img">
+</div>
+
+<section id="contact">
+  <h2>CONTACT US</h2>
+  <p>für Buchungsanfragen, Beschwerden oder Liebesbriefe kannst du uns hier schreiben. Wir antworten garantiert!</p>
+  <div class="contact-container">
+    <form action="https://formspree.io/f/xkoyqypb" method="POST" class="contact-form">
+      <input type="text" name="name" placeholder="Dein Name" required>
+      <input type="email" name="_replyto" placeholder="Deine E-Mail Adresse" required>
+      <textarea name="message" rows="5" placeholder="Deine Nachricht an Bunski..." required></textarea>
+      
+      <input type="text" name="_gotcha" style="display:none">
+      
+      <button type="submit">ABSENDEN</button>
+    </form>
+  </div>
+</section>
+
+<section id="social">
+  <h2>SOCIAL MEDIA</h2>
+  <p>Folgt uns auf diesen Plattformen!</p>
+  <div class="social-list">
+    <a href="https://open.spotify.com/intl-de/artist/6UgtHpGSuJkm7slCFYlpwb?si=q2WwisVxQoagJP-5OAdVPw" target="_blank" class="social-link spotify">
+      <i class="fab fa-spotify"></i>
+      <span class="social-text">Spotify: Bunski</span>
+    </a>
+    <a href="https://youtube.com/channel/UCukvPqDsM5peg2mVeQDBVkQ?si=wK31ujRCpqsqGQKF" target="_blank" class="social-link youtube">
+      <i class="fab fa-youtube"></i>
+      <span class="social-text">Youtube: Bunski</span>
+    </a>
+    <a href="https://www.instagram.com/bunski_music/" target="_blank" class="social-link instagram">
+      <i class="fab fa-instagram"></i>
+      <span class="social-text">Instagram: Bunski_Music</span>
+    </a>
+  </div>
+</section>
+
+<script>
+// Lightbox Funktionen
+function openImage(src) {
+  document.getElementById("lightbox").style.display = "flex";
+  document.getElementById("lightbox-img").src = src;
+}
+
+function closeImage() {
+  document.getElementById("lightbox").style.display = "none";
+}
+
+// Burger Menu Logik
+const burgerMenu = document.getElementById('burger-menu');
+const navLinksContainer = document.getElementById('nav-links-container');
+const individualLinks = document.querySelectorAll('#nav-links-container a');
+
+// Umschalten der Menü-Sichtbarkeit
+burgerMenu.addEventListener('click', () => {
+  navLinksContainer.classList.toggle('active');
+});
+
+// Schließen des Menüs nach Klick auf einen Link
+individualLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navLinksContainer.classList.remove('active');
+  });
+});
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bunski</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  background-color: #FFF7D2;
+
+  background-image: url('BG3x.jpg');
+  background-repeat: repeat;
+  background-position: center;
+  background-size: contain;
+  background-attachment: fixed;
+}
+
+p {
+  font-size: 22px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 15px auto;
+}
+
+h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 100px;
+}
+
+h2 {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.1); /* 10% opacity */
+  color: black;
+
+  margin: 0;          
+  padding: 10px 0;    
+
+  text-align: center;
+  letter-spacing: 3px;
+
+  backdrop-filter: blur(8px); /* optional: wie Navbar */
+}
+
+h3 {
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
 /* NAV */
 nav {
   position: fixed;
